@@ -29,10 +29,11 @@ public class RegisterRequestDTO {
     private String companyName;
 
     @NotBlank(message = "La descripcion de la compania es requerida.")
-    @Size(max = 500, message = "La descripcion no debe tener mas de 500 caracteres.")
+    @Size(max = 255, message = "La descripcion no debe tener mas de 255 caracteres.")
     private String companyDescription;
 
     @Email(message = "El email de la compania no tiene un formato valido.")
+    @Size(max = 255, message = "El email de la compañía no debe superar los 255 caracteres.")
     private String companyEmail;
 
     @NotNull(message = "El pais es requerido.") 

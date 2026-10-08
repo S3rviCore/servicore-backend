@@ -1,18 +1,47 @@
 package com.servicore.web.dtos.response;
 
 public class RegisterResponseDTO {
-    
-    private Long userId;
-    private String name;
-    private String lastName;
-    private String email;
 
-    private Long companyId;
-    private String companyName;
-    private String companyDescription;
-    private String companyEmail;
-    private String role;
-    
+    private final Long userId;
+    private final String name;
+    private final String lastName;
+    private final String email;
+
+    private final Long companyId;
+    private final String companyName;
+    private final String companyDescription;
+    private final String companyEmail;
+
+    private final String roleName;
+
+    private final String token;
+    private final String tokenType;
+
+    public RegisterResponseDTO(
+            Long userId,
+            String name,
+            String lastName,
+            String email,
+            Long companyId,
+            String companyName,
+            String companyDescription,
+            String companyEmail,
+            String roleName,
+            String token
+    ) {
+        this.userId = userId;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.companyId = companyId;
+        this.companyName = companyName;
+        this.companyDescription = companyDescription;
+        this.companyEmail = companyEmail;
+        this.roleName = roleName;
+        this.token = token;
+        this.tokenType = "Bearer";
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -45,8 +74,15 @@ public class RegisterResponseDTO {
         return companyEmail;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleName() {
+        return roleName;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public String getTokenType() {
+        return tokenType;
+    }
 }
