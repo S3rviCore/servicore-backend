@@ -1,7 +1,6 @@
 package com.servicore.web.models;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity 
@@ -26,6 +25,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    private Boolean mustChangePassword;
 
     @ManyToOne 
     @JoinColumn(name = "role_id", nullable = false)
@@ -35,8 +35,8 @@ public class User {
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
-    @OneToMany(mappedBy = "user")
-    private List<Technician> technicians;
+    @OneToOne(mappedBy = "user")
+    private Technician technicians;
 
     private boolean status;
     private LocalDateTime lastAccess;
@@ -49,6 +49,35 @@ public class User {
 
     public User() {
 
+    }
+
+    public  User(
+        String name,
+        String lastName,
+        String email,
+        Role role
+    ) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.role = role;
+    };
+
+    public User(
+        String name,
+        String lastName,
+        String email,
+        String encodedPassword,
+        Role role,
+        Company company
+    ) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = encodedPassword;
+        this.role = role;
+        this.company = company;
+        this.status = true;
     }
 
     public Long getId() {
@@ -87,6 +116,14 @@ public class User {
         this.password = password;
     }
 
+    public Boolean getMustChangePassword() {
+        return mustChangePassword;
+    }
+
+    public void setMustChangePassword(Boolean mustChangePassword) {
+        this.mustChangePassword = mustChangePassword;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -103,7 +140,7 @@ public class User {
         this.company = company;
     }
 
-    public List<Technician> getTechnicians() {
+    public Technician getTechnicians() {
         return technicians;
     }
 
