@@ -50,6 +50,20 @@ public class Company {
 
     }
 
+    public Company(
+        String logoUrl,
+        String name,
+        String email,
+        String description,
+        Country country
+    ) {
+        this.logoUrl = logoUrl;
+        this.name = name;
+        this.email = email;
+        this.description = description;
+        this.country = country;
+    }
+
     public Long getId() {
         return id;
     }
