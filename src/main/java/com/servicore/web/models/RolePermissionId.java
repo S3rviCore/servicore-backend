@@ -14,6 +14,14 @@ public class RolePermissionId implements Serializable {
 
     }
 
+    public RolePermissionId(
+        Long roleId,
+        Long permissionId
+    ) {
+        this.roleId = roleId;
+        this.permissionId = permissionId;
+    }
+
     public Long getRoleId() {
         return roleId;
     }
