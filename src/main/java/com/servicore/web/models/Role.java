@@ -45,6 +45,16 @@ public class Role {
 
     }
 
+    public Role (
+        String name,
+        String description,
+        Company company
+    ) {
+        this.name = name;
+        this.description = description;
+        this.company = company;
+    }
+ 
     public Long getId() {
         return id;
     }
