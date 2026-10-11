@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -23,6 +25,10 @@ public class Speciality {
     private String name;
     private String description;
 
+    @ManyToOne 
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company company;
+
     @OneToMany(mappedBy = "speciality")
     private List<TechnicianSpecialities> technicianSpecialities;
 
@@ -34,6 +40,16 @@ public class Speciality {
 
     public Speciality() {
 
+    }
+
+    public Speciality(
+        String name,
+        String description,
+        Company company
+    ) {
+        this.name = name;
+        this.description = description;
+        this.company = company;
     }
 
     public Long getId() {
@@ -54,6 +70,14 @@ public class Speciality {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public List<TechnicianSpecialities> getTechnicianSpecialities() {

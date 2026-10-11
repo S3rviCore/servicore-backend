@@ -40,6 +40,9 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<Role> roles;
 
+    @OneToMany(mappedBy = "company")
+    private List<Speciality> specialities;
+
     @CreationTimestamp 
     private LocalDateTime createdAt;
 
@@ -118,6 +121,10 @@ public class Company {
 
     public List<Role> getRoles() {
         return roles;
+    }
+
+    public List<Speciality> getSpecialities() {
+        return specialities;
     }
 
     public LocalDateTime getCreatedAt() {
