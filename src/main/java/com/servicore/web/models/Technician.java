@@ -43,6 +43,16 @@ public class Technician {
 
     }
 
+    public Technician(
+        User user,
+        String phone,
+        Boolean status
+    ) {
+        this.user = user;
+        this.phone = phone;
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }
