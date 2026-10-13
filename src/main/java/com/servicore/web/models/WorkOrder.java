@@ -44,7 +44,7 @@ public class WorkOrder {
 
     @ManyToOne 
     @JoinColumn(name = "service_id", nullable = false)
-    private Service service;
+    private ServiceModel service;
 
     private LocalDateTime programmedDate;
     private String serviceAddress;
@@ -80,7 +80,7 @@ public class WorkOrder {
         Company company,
         String orderCode,
         Customer customer,
-        Service service,
+        ServiceModel service,
         LocalDateTime programmedDate,
         String serviceAddress,
         String problemDescription,
@@ -128,11 +128,11 @@ public class WorkOrder {
         this.customer = customer;
     }
 
-    public Service getService() {
+    public ServiceModel getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public void setService(ServiceModel service) {
         this.service = service;
     }
 

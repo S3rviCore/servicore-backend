@@ -19,7 +19,7 @@ import jakarta.persistence.Table;
 
 @Entity 
 @Table(name = "services")
-public class Service {
+public class ServiceModel {
     
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,11 +47,11 @@ public class Service {
     @UpdateTimestamp 
     private LocalDateTime updatedAt;
 
-    public Service() {
+    public ServiceModel() {
 
     }
 
-    public Service(
+    public ServiceModel(
         Company company,
         String name,
         String description,
