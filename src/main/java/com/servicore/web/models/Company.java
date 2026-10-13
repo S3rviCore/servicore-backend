@@ -41,6 +41,9 @@ public class Company {
     private List<Role> roles;
 
     @OneToMany(mappedBy = "company")
+    private List<WorkOrder> workOrders;
+
+    @OneToMany(mappedBy = "company")
     private List<Speciality> specialities;
 
     @CreationTimestamp 
@@ -121,6 +124,10 @@ public class Company {
 
     public List<Role> getRoles() {
         return roles;
+    }
+
+    public List<WorkOrder> getWorkOrders() {
+        return workOrders;
     }
 
     public List<Speciality> getSpecialities() {
