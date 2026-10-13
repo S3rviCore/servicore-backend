@@ -47,8 +47,36 @@ public class Customer {
 
     }
 
+    public Customer(
+        Company company,
+        String name,
+        String lastName,
+        String phone,
+        String email,
+        Country country,
+        String address,
+        Boolean status
+    ) {
+        this.company = company;
+        this.name = name;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
+        this.country = country;
+        this.address = address;
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public String getName() {
@@ -81,6 +109,14 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     public String getAddress() {
