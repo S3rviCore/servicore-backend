@@ -2,27 +2,35 @@ package com.servicore.web.services;
 
 import java.math.BigDecimal;
 import java.time.Year;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.servicore.web.dtos.request.WorkOrderRequestDTO;
+import com.servicore.web.dtos.request.WorkOrderTechnicinaRequestDTO;
 import com.servicore.web.dtos.response.WorkOrderResponseDTO;
+import com.servicore.web.enums.TechnicianRole;
 import com.servicore.web.exceptions.ResourceNotFoundException;
 import com.servicore.web.models.Company;
 import com.servicore.web.models.Customer;
 import com.servicore.web.models.Priority;
 import com.servicore.web.models.ServiceModel;
+import com.servicore.web.models.Technician;
 import com.servicore.web.models.WorkOrder;
 import com.servicore.web.models.WorkOrderStatus;
+import com.servicore.web.models.WorkOrderTechnician;
 import com.servicore.web.repositories.CompanyRepository;
 import com.servicore.web.repositories.CustomerRepository;
 import com.servicore.web.repositories.PriorityRepository;
 import com.servicore.web.repositories.ServiceRepository;
+import com.servicore.web.repositories.TechnicianRepository;
 import com.servicore.web.repositories.WorkOrderRepository;
 import com.servicore.web.repositories.WorkOrderStatusRepository;
+import com.servicore.web.repositories.WorkOrderTechnicinaRepository;
 
 @Service 
 public class WorkOrderService {
@@ -33,6 +41,8 @@ public class WorkOrderService {
     private final ServiceRepository serviceRepository;
     private final PriorityRepository priorityRepository;
     private final WorkOrderStatusRepository workOrderStatusRepository;
+    private final TechnicianRepository technicianRepository;
+    private final WorkOrderTechnicinaRepository workOrderTechnicianRepository;
 
     public WorkOrderService(
         WorkOrderRepository workOrderRepository,
@@ -40,7 +50,9 @@ public class WorkOrderService {
         CustomerRepository customerRepository,
         ServiceRepository serviceRepository,
         PriorityRepository priorityRepository,
-        WorkOrderStatusRepository workOrderStatusRepository
+        WorkOrderStatusRepository workOrderStatusRepository,
+        TechnicianRepository technicianRepository,
+        WorkOrderTechnicinaRepository workOrderTechnicianRepository
     ) {
         this.workOrderRepository = workOrderRepository;
         this.companyRepository = companyRepository;
@@ -48,6 +60,8 @@ public class WorkOrderService {
         this.serviceRepository = serviceRepository;
         this.priorityRepository = priorityRepository;
         this.workOrderStatusRepository = workOrderStatusRepository;
+        this.technicianRepository = technicianRepository;
+        this.workOrderTechnicianRepository = workOrderTechnicianRepository;
     }
 
     @Transactional(readOnly = true)
@@ -114,8 +128,71 @@ public class WorkOrderService {
 
         WorkOrder saved = workOrderRepository.save(workOrder);
 
+        assignTechnicians(workOrder, company, dto.getTechnicians());
+        
         return toResponseDTO(saved);
     }
+
+
+    private void assignTechnicians(
+            WorkOrder workOrder,
+            Company company,
+            List<WorkOrderTechnicinaRequestDTO> techniciansDTO) {
+
+        Set<Long> assignedTechnicianIds = new HashSet<>();
+        List<WorkOrderTechnician> assignments = new java.util.ArrayList<>();
+
+        int leadTechniciansCount = 0;
+
+        for (WorkOrderTechnicinaRequestDTO technicianDTO : techniciansDTO) {
+
+            Long technicianId = technicianDTO.getTechnicianId();
+
+            if (!assignedTechnicianIds.add(technicianId)) {
+                throw new IllegalArgumentException(
+                    "Un técnico no puede asignarse dos veces a la misma orden."
+                );
+            }
+
+            Technician technician = technicianRepository
+                .findById(technicianId)
+                .orElseThrow(() ->
+                    new ResourceNotFoundException(
+                        "Técnico no encontrado: " + technicianId
+                    )
+                );
+
+            if (!technician.getUser().getCompany().getId()
+                    .equals(company.getId())) {
+                throw new IllegalArgumentException(
+                    "El técnico " + technicianId
+                    + " no pertenece a la empresa de la orden."
+                );
+            }
+
+            if (technicianDTO.getTechnicianRole()
+                    == TechnicianRole.LEAD_TECHNICIAN) {
+                leadTechniciansCount++;
+            }
+
+            assignments.add(
+                new WorkOrderTechnician(
+                    technician,
+                    workOrder,
+                    technicianDTO.getTechnicianRole()
+                )
+            );
+        }
+
+        if (leadTechniciansCount != 1) {
+            throw new IllegalArgumentException(
+                "La orden debe tener exactamente un técnico principal."
+            );
+        }
+
+        workOrderTechnicianRepository.saveAll(assignments);
+    }
+
 
     public String generateWorkOrderCode(Long companyId) {
 

@@ -1,9 +1,11 @@
 package com.servicore.web.dtos.request;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -39,6 +41,10 @@ public class WorkOrderRequestDTO {
     @NotNull(message = "El ID del estado de la orden es requerido.")
     @Positive(message = "El ID del estado de la orden debe ser positivo.")
     private Long workOrderStatusId;
+
+    @NotEmpty(message = "Los tecnicos son requeridos.")
+    @Valid 
+    private List<WorkOrderTechnicinaRequestDTO> technicians; 
 
     public WorkOrderRequestDTO() {
 
@@ -98,6 +104,14 @@ public class WorkOrderRequestDTO {
 
     public void setPriorityId(Long priorityId) {
         this.priorityId = priorityId;
+    }
+
+    public List<WorkOrderTechnicinaRequestDTO> getTechnicians() {
+        return technicians;
+    }
+
+    public void setTechnicians(List<WorkOrderTechnicinaRequestDTO> technicians) {
+        this.technicians = technicians;
     }
 
     public Long getWorkOrderStatusId() {
