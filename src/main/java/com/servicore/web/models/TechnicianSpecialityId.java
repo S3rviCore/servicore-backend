@@ -15,6 +15,11 @@ public class TechnicianSpecialityId implements Serializable {
 
     }
 
+    public TechnicianSpecialityId(Long technicianId, Long specialityId) {
+        this.technicianId = technicianId;
+        this.specialityId = specialityId;
+    }
+
     public Long getTechnicianId() {
         return technicianId;
     }

@@ -39,6 +39,14 @@ public class TechnicianSpecialities {
 
     }
 
+    public TechnicianSpecialities(
+        Technician technician,
+        Speciality speciality
+    ) {
+        this.technician = technician;
+        this.speciality = speciality;
+    }
+
     public TechnicianSpecialityId getId() {
         return id;
     }

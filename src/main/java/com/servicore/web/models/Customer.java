@@ -1,6 +1,7 @@
 package com.servicore.web.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity 
@@ -34,6 +36,9 @@ public class Customer {
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
+    @OneToMany(mappedBy = "customer")
+    private List<WorkOrder> workOrders; 
+
     private String address;
     private Boolean status;
 
@@ -47,8 +52,36 @@ public class Customer {
 
     }
 
+    public Customer(
+        Company company,
+        String name,
+        String lastName,
+        String phone,
+        String email,
+        Country country,
+        String address,
+        Boolean status
+    ) {
+        this.company = company;
+        this.name = name;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
+        this.country = country;
+        this.address = address;
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public String getName() {
@@ -81,6 +114,18 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public List<WorkOrder> getWorkOrders() {
+        return workOrders;
     }
 
     public String getAddress() {
