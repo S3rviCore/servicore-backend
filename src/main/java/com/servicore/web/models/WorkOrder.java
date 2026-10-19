@@ -86,7 +86,8 @@ public class WorkOrder {
         String problemDescription,
         Priority priority,
         WorkOrderStatus workOrderStatus,
-        BigDecimal estimatedPrice
+        BigDecimal estimatedPrice,
+        BigDecimal finalPrice
     ) {
         this.company = company;
         this.orderCode = orderCode;
@@ -98,6 +99,7 @@ public class WorkOrder {
         this.priority = priority;
         this.workOrderStatus = workOrderStatus;
         this.estimatedPrice = estimatedPrice;
+        this.finalPrice = finalPrice;
     }
 
     public Long getId() {
