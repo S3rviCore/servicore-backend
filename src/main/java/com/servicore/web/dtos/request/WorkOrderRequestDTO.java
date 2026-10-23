@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 public class WorkOrderRequestDTO {
     
     @NotNull(message = "El ID de la compania es requerido.")
-    @Positive(message = "El ID de la campania debe ser positivo.")
+    @Positive(message = "El ID de la campania debe ser posigtivo.")
     private Long companyId;
 
     @NotNull(message = "El ID del cliente es requerido.")
