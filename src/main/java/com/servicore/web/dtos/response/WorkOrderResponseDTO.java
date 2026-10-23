@@ -1,10 +1,12 @@
+
 package com.servicore.web.dtos.response;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class WorkOrderResponseDTO {
-    
+
     private final Long workOrderId;
     private final Long companyId;
     private final String companyName;
@@ -25,6 +27,8 @@ public class WorkOrderResponseDTO {
     private final BigDecimal finalPrice;
     private final LocalDateTime finishedAt;
 
+    private final List<WorkOrderTechnicianResponseDTO> technicians;
+
     public WorkOrderResponseDTO(
         Long workOrderId,
         Long companyId,
@@ -44,7 +48,8 @@ public class WorkOrderResponseDTO {
         String workOrderStatusName,
         BigDecimal estimatedPrice,
         BigDecimal finalPrice,
-        LocalDateTime finishedAt
+        LocalDateTime finishedAt,
+        List<WorkOrderTechnicianResponseDTO> technicians
     ) {
         this.workOrderId = workOrderId;
         this.companyId = companyId;
@@ -65,6 +70,7 @@ public class WorkOrderResponseDTO {
         this.estimatedPrice = estimatedPrice;
         this.finalPrice = finalPrice;
         this.finishedAt = finishedAt;
+        this.technicians = technicians;
     }
 
     public Long getWorkOrderId() {
@@ -143,4 +149,7 @@ public class WorkOrderResponseDTO {
         return finishedAt;
     }
 
+    public List<WorkOrderTechnicianResponseDTO> getTechnicians() {
+        return technicians;
+    }
 }

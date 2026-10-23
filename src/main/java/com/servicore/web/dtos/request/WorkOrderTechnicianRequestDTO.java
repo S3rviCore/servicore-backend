@@ -1,12 +1,15 @@
 
 package com.servicore.web.dtos.request;
 
+import java.util.List;
+
 import com.servicore.web.enums.TechnicianRole;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-public class WorkOrderTechnicinaRequestDTO {
+public class WorkOrderTechnicianRequestDTO {
 
     @NotNull(message = "El ID del técnico es requerido.")
     @Positive(message = "El ID del técnico debe ser positivo.")
@@ -15,7 +18,10 @@ public class WorkOrderTechnicinaRequestDTO {
     @NotNull(message = "El rol del técnico es requerido.")
     private TechnicianRole technicianRole;
 
-    public WorkOrderTechnicinaRequestDTO() {
+    @Valid 
+    private List<WorkOrderTechnicianToolRequestDTO> tools;
+
+    public WorkOrderTechnicianRequestDTO() {
     }
 
     public Long getTechnicianId() {
@@ -32,5 +38,13 @@ public class WorkOrderTechnicinaRequestDTO {
 
     public void setTechnicianRole(TechnicianRole technicianRole) {
         this.technicianRole = technicianRole;
+    }
+
+    public List<WorkOrderTechnicianToolRequestDTO> getTools() {
+        return tools;
+    }
+
+    public void setTools(List<WorkOrderTechnicianToolRequestDTO> tools) {
+        this.tools = tools;
     }
 }

@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 public class WorkOrderRequestDTO {
     
     @NotNull(message = "El ID de la compania es requerido.")
-    @Positive(message = "El ID de la campania debe ser positivo.")
+    @Positive(message = "El ID de la campania debe ser posigtivo.")
     private Long companyId;
 
     @NotNull(message = "El ID del cliente es requerido.")
@@ -44,7 +44,7 @@ public class WorkOrderRequestDTO {
 
     @NotEmpty(message = "Los tecnicos son requeridos.")
     @Valid 
-    private List<WorkOrderTechnicinaRequestDTO> technicians; 
+    private List<WorkOrderTechnicianRequestDTO> technicians; 
 
     public WorkOrderRequestDTO() {
 
@@ -106,11 +106,11 @@ public class WorkOrderRequestDTO {
         this.priorityId = priorityId;
     }
 
-    public List<WorkOrderTechnicinaRequestDTO> getTechnicians() {
+    public List<WorkOrderTechnicianRequestDTO> getTechnicians() {
         return technicians;
     }
 
-    public void setTechnicians(List<WorkOrderTechnicinaRequestDTO> technicians) {
+    public void setTechnicians(List<WorkOrderTechnicianRequestDTO> technicians) {
         this.technicians = technicians;
     }
 
