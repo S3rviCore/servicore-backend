@@ -49,6 +49,9 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<Tool> tools;
 
+    @OneToMany(mappedBy = "company")
+    private List<Material> materials;
+
     @CreationTimestamp 
     private LocalDateTime createdAt;
 
@@ -139,6 +142,10 @@ public class Company {
 
     public List<Tool> getTools() {
         return tools;
+    }
+
+    public List<Material> getMaterials() {
+        return materials;
     }
 
     public LocalDateTime getCreatedAt() {
