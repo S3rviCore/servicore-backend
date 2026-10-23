@@ -44,7 +44,7 @@ public class WorkOrderRequestDTO {
 
     @NotEmpty(message = "Los tecnicos son requeridos.")
     @Valid 
-    private List<WorkOrderTechnicinaRequestDTO> technicians; 
+    private List<WorkOrderTechnicianRequestDTO> technicians; 
 
     public WorkOrderRequestDTO() {
 
@@ -106,11 +106,11 @@ public class WorkOrderRequestDTO {
         this.priorityId = priorityId;
     }
 
-    public List<WorkOrderTechnicinaRequestDTO> getTechnicians() {
+    public List<WorkOrderTechnicianRequestDTO> getTechnicians() {
         return technicians;
     }
 
-    public void setTechnicians(List<WorkOrderTechnicinaRequestDTO> technicians) {
+    public void setTechnicians(List<WorkOrderTechnicianRequestDTO> technicians) {
         this.technicians = technicians;
     }
 

@@ -9,7 +9,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-public class WorkOrderTechnicinaRequestDTO {
+public class WorkOrderTechnicianRequestDTO {
 
     @NotNull(message = "El ID del técnico es requerido.")
     @Positive(message = "El ID del técnico debe ser positivo.")
@@ -21,7 +21,7 @@ public class WorkOrderTechnicinaRequestDTO {
     @Valid 
     private List<WorkOrderTechnicianToolRequestDTO> tools;
 
-    public WorkOrderTechnicinaRequestDTO() {
+    public WorkOrderTechnicianRequestDTO() {
     }
 
     public Long getTechnicianId() {
