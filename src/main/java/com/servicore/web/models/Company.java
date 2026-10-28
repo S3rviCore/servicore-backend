@@ -52,6 +52,15 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<Material> materials;
 
+    @OneToMany(mappedBy = "company")
+    private List<PaymentMethod> paymentMethods;
+
+    @OneToMany(mappedBy = "company")
+    private List<PaymentStatus> paymentStatuses;
+
+    @OneToMany(mappedBy = "company")
+    private List<Payment> payments;
+
     @CreationTimestamp 
     private LocalDateTime createdAt;
 
@@ -146,6 +155,18 @@ public class Company {
 
     public List<Material> getMaterials() {
         return materials;
+    }
+
+    public List<PaymentMethod> getPaymentMethods() {
+        return paymentMethods;
+    }
+
+    public List<PaymentStatus> getPaymentStatuses() {
+        return paymentStatuses;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
     }
 
     public LocalDateTime getCreatedAt() {

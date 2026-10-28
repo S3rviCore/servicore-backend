@@ -2,6 +2,7 @@ package com.servicore.web.models;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -63,6 +65,9 @@ public class WorkOrder {
 
     @Column(precision = 12, scale = 2)
     private BigDecimal finalPrice;
+
+    @OneToMany(mappedBy = "workOrder")
+    private List<Payment> payments;
 
     @CreationTimestamp 
     private LocalDateTime createdAt;
@@ -192,6 +197,10 @@ public class WorkOrder {
 
     public void setFinalPrice(BigDecimal finalPrice) {
         this.finalPrice = finalPrice;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
     }
 
     public LocalDateTime getCreatedAt() {
