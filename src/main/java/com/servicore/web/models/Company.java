@@ -58,6 +58,9 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<PaymentStatus> paymentStatuses;
 
+    @OneToMany(mappedBy = "company")
+    private List<Payment> payments;
+
     @CreationTimestamp 
     private LocalDateTime createdAt;
 
@@ -160,6 +163,10 @@ public class Company {
 
     public List<PaymentStatus> getPaymentStatuses() {
         return paymentStatuses;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
     }
 
     public LocalDateTime getCreatedAt() {

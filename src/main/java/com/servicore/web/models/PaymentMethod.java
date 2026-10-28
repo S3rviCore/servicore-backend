@@ -1,11 +1,14 @@
 package com.servicore.web.models;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "payment_method")
 public class PaymentMethod {
@@ -17,6 +20,9 @@ public class PaymentMethod {
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
+
+    @OneToMany(mappedBy = "paymentMethod")
+    private List<Payment> payments;
 
     private String name;
 
@@ -47,6 +53,10 @@ public class PaymentMethod {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
     }
 
     public String getName() {
