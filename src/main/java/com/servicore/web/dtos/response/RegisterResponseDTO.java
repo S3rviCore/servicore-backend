@@ -12,6 +12,10 @@ public class RegisterResponseDTO {
     private final String companyDescription;
     private final String companyEmail;
 
+    private final String country;
+    private final String departament;
+    private final String municipality;
+
     private final String roleName;
 
     private final String token;
@@ -26,6 +30,9 @@ public class RegisterResponseDTO {
             String companyName,
             String companyDescription,
             String companyEmail,
+            String country,
+            String departament,
+            String municipality,
             String roleName,
             String token
     ) {
@@ -37,6 +44,9 @@ public class RegisterResponseDTO {
         this.companyName = companyName;
         this.companyDescription = companyDescription;
         this.companyEmail = companyEmail;
+        this.country = country;
+        this.departament = departament;
+        this.municipality = municipality;
         this.roleName = roleName;
         this.token = token;
         this.tokenType = "Bearer";
@@ -72,6 +82,18 @@ public class RegisterResponseDTO {
 
     public String getCompanyEmail() {
         return companyEmail;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getDepartament() {
+        return departament;
+    }
+
+    public String getMunicipality() {
+        return municipality;
     }
 
     public String getRoleName() {

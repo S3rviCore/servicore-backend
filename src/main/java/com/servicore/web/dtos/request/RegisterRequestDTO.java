@@ -3,6 +3,7 @@ package com.servicore.web.dtos.request;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 public class RegisterRequestDTO {
@@ -28,16 +29,25 @@ public class RegisterRequestDTO {
     @Size(max = 255, message = "El nombre de la compania no debe tener mas de 255 caracteres.")
     private String companyName;
 
-    @NotBlank(message = "La descripcion de la compania es requerida.")
     @Size(max = 255, message = "La descripcion no debe tener mas de 255 caracteres.")
     private String companyDescription;
 
+    @NotBlank(message = "El email de la compania es requerido.")
     @Email(message = "El email de la compania no tiene un formato valido.")
     @Size(max = 255, message = "El email de la compañía no debe superar los 255 caracteres.")
     private String companyEmail;
 
-    @NotNull(message = "El pais es requerido.") 
+    @NotNull(message = "El ID del pais es requerido.") 
+    @Positive(message = "El ID del pais debe ser positivo.")
     private Long countryId;
+
+    @NotNull(message = "El ID del departamento es requerido.")
+    @Positive(message = "El ID del departamento debe ser positivo.")
+    private Long departamentId;
+
+    @NotNull(message = "El ID del muncipio es requerido.")
+    @Positive(message = "El ID del municipio debe ser positivo.")
+    private Long municipalityId;
 
     public String getName() {
         return name;
@@ -101,6 +111,22 @@ public class RegisterRequestDTO {
 
     public void setCountryId(Long countryId) {
         this.countryId = countryId;
+    }
+
+    public Long getDepartamentId() {
+        return departamentId;
+    }
+
+    public void setDepartamentId(Long departamentId) {
+        this.departamentId = departamentId;
+    }
+
+    public Long getMunicipalityId() {
+        return municipalityId;
+    }
+
+    public void setMunicipalityId(Long municipalityId) {
+        this.municipalityId = municipalityId;
     }
 
 }
