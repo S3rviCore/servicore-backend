@@ -31,6 +31,14 @@ public class Company {
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
+    @ManyToOne 
+    @JoinColumn(name = "departament_id", nullable = false)
+    private Departament departament;
+
+    @ManyToOne 
+    @JoinColumn(name = "municipality_id", nullable = false)
+    private Municipality municipality;
+
     @OneToMany(mappedBy = "company")
     private List<User> users;
 
@@ -85,6 +93,24 @@ public class Company {
         this.country = country;
     }
 
+    public Company(
+        String logoUrl,
+        String name,
+        String email,
+        String description,
+        Country country,
+        Departament departament,
+        Municipality municipality
+    ) {
+        this.logoUrl = logoUrl;
+        this.name = name;
+        this.email = email;
+        this.description = description;
+        this.country = country;
+        this.departament = departament;
+        this.municipality = municipality;
+    }
+
     public Long getId() {
         return id;
     }
@@ -127,6 +153,22 @@ public class Company {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public Departament getDepartament() {
+        return departament;
+    }
+
+    public void setDepartament(Departament departament) {
+        this.departament = departament;
+    }
+
+    public Municipality getMunicipality() {
+        return municipality;
+    }
+
+    public void setMunicipality(Municipality municipality) {
+        this.municipality = municipality;
     }
 
     public List<User> getUsers() {
