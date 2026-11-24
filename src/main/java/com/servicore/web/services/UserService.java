@@ -125,7 +125,15 @@ public class UserService {
         user.setMustChangePassword(true);
 
         User savedUser = userRepostory.save(user);
-        return toResponseDTO(savedUser);
+        return new UserResponseDTO(
+            savedUser.getId(),
+            savedUser.getName(),
+            savedUser.getLastName(),
+            savedUser.getEmail(),
+            savedUser.getRole().getId(),
+            savedUser.getRole().getName(),
+            temporaryPassword
+        );
     }
 
     private UserResponseDTO toResponseDTO(User user) {
