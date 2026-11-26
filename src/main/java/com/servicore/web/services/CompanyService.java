@@ -28,6 +28,17 @@ public class CompanyService {
     }
 
     @Transactional(readOnly = true)
+    public CompanyResponseDTO getCompanyById(Long id) {
+        Company company = companyRepository
+                    .findById(id)
+                    .orElseThrow(() -> 
+                        new ResourceNotFoundException("Compania no encontrada.")
+                    );
+
+        return toResponseDTO(company);
+    }
+
+    @Transactional(readOnly = true)
     public List<CompanyResponseDTO> getAllCompanies() {
         return companyRepository.findAll()
                 .stream()
