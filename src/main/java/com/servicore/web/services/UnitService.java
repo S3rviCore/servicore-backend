@@ -52,7 +52,7 @@ public class UnitService {
     }
 
     public UnitResponseDTO toResponseDTO(Unit unit) {
-        return new UnitResponseDTO(unit.getName(), unit.getDescription());
+        return new UnitResponseDTO(unit.getId(), unit.getName(), unit.getDescription());
     }
 
 }
